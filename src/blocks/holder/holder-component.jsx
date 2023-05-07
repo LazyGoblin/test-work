@@ -6,10 +6,10 @@ const Holder = ({ onChange }) => {
 
   const handleHolderChange = (event) => {
     let newValue = event.target.value.toUpperCase();
-    newValue = newValue.replace(/[^A-Z\s]/g, "");
+    newValue = newValue.replace(/[^A-Za-z\s]/g, "");
     setHolder(newValue);
-    onChange(event); 
-};
+    onChange(event);
+  };
 
   return (
     <Input

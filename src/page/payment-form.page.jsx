@@ -13,13 +13,14 @@ const PaymentForm = () => {
         cvv2: ""
     });
 
-const handleInputChange = useCallback((event) => {
-    const { name, value } = event.target;
-    setFormData(prevState => ({
-        ...prevState,
-        [name]: value
-    }));
-}, []);
+    const handleInputChange = useCallback((event) => {
+        const { name, value } = event.target;
+        const uppercaseValue = value.toUpperCase();
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: uppercaseValue
+        }));
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
