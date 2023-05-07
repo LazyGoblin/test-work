@@ -1,5 +1,6 @@
+import PaymentForm from '../page/payment-form.page';
 import './App.css';
-import PaymentForm from './payment-form/payment-form.page';
+
 
 function App() {
   return (
