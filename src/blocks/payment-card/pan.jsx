@@ -18,7 +18,7 @@ const Pan = ({ onChange }) => {
             label="Номер карты"
             type="text"
             maxLength="19"
-            placeholder="1234 1234 1234 1234"
+            placeholder="**** **** **** ****"
             required
             value={pan.replace(/(\d{4})/g, "$1 ")}
             onChange={handlePanChange}

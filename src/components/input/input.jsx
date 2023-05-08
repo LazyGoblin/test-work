@@ -4,7 +4,7 @@ const Input = ({ label, id, ...rest }) => {
   return (
     <div>
       {label && <label htmlFor={id}>{label}</label>}
-      <input id={id} {...rest} />
+      <input className="form-control" id={id} {...rest} />
     </div>
   );
 };

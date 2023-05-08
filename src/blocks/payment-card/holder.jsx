@@ -8,7 +8,12 @@ const Holder = ({ onChange }) => {
     let newValue = event.target.value.toUpperCase();
     newValue = newValue.replace(/[^A-Za-z\s]/g, "");
     setHolder(newValue);
-    onChange(event);
+    onChange({
+      target: {
+        name: "holder",
+        value: newValue
+      }
+    });
   };
 
   return (
