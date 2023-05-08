@@ -24,6 +24,7 @@
           placeholder="CVC"
           value={cvv2}
           onChange={handleInputChange}
+          style={{ width: '60px' }}
         />
       );
     };

@@ -22,6 +22,7 @@ const Pan = ({ onChange }) => {
             required
             value={pan.replace(/(\d{4})/g, "$1 ")}
             onChange={handlePanChange}
+            style={{ width: '200px' }}
         />
     );
 };

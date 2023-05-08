@@ -27,6 +27,7 @@ const Holder = ({ onChange }) => {
       placeholder="JOHN DOE"
       onChange={handleHolderChange}
       pattern="^[A-Z\s]*$"
+      style={{ width: '230px' }}
     />
   );
 };

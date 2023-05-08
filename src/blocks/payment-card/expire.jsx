@@ -24,6 +24,7 @@ const Expire = ({ onChange }) => {
             required
             value={expire}
             onChange={handleExpireChange}
+            style={{ width: '80px' }}
         />
     );
 };
