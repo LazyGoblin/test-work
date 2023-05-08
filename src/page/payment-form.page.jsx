@@ -7,17 +7,19 @@ import Holder from '../blocks/payment-card/holder';
 
 import './payment-form.style.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 
 const PaymentForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [modalTitle, setModalTitle] = useState('Modal title');
   const [formData, setFormData] = useState({
-      pan: '',
-      expire: '',
-      holder: '',
-      cvv2: ''
+    pan: '',
+    expire: '',
+    holder: '',
+    cvv2: ''
   });
   const handleInputChange = useCallback((event) => {
     const { name, value } = event.target;
@@ -46,13 +48,16 @@ const PaymentForm = () => {
       const data = await response.json();
       setLoading(false);
       setSuccess(true);
+      setModalTitle('Успех!');
       console.log(data);
     } catch (err) {
       setLoading(false);
       setError(true);
+      setModalTitle('Неудача!');
       console.error(err);
     }
   };
+
 
   return (
     <section className="container">
@@ -79,31 +84,46 @@ const PaymentForm = () => {
         </div>
         <div className="btn-container">
           <button type="button" className="btn btn-primary" name="Назад">Назад</button>
-          <button type="submit" className="btn btn-success" name="Отправить">Отправить</button>
+          <button type="submit" className="btn btn-success" name="Отправить" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Отправить</button>
         </div>
       </form>
-      {loading && (
-        <dialog open>
-          <p>Отправляем данные...</p>
-        </dialog>
-      )}
 
-      {error && (
-        <dialog open>
-          <p>Ошибка!</p>
-          <button type="button" className="btn btn-danger" onClick={() => setError(false)}>Закрыть</button>
-        </dialog>
-      )}
-
-      {success && (
-        <dialog open>
-          <p>Выполнено!</p>
-          <button type="button" class="btn btn-success" onClick={()=> setSuccess(false)}>Закрыть</button>
-        </dialog>
-      )}
+      <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="staticBackdropLabel">{modalTitle}</h1>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              {loading ? (
+                <div className="d-flex justify-content-center">
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              ) : success ? (
+                <div className="alert alert-success" role="alert">
+                  Выполнено!
+                  <button type="button" className="btn-close" onClick={() => setSuccess(false)}></button>
+                </div>
+              ) : error ? (
+                <div className="alert alert-danger" role="alert">
+                  Ошибка!
+                  <button type="button" className="btn-close" onClick={() => setError(false)}></button>
+                </div>
+              ) : (
+                <p>Заполните форму и отправьте данные</p>
+              )}
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
-
 };
 
 export default PaymentForm;
